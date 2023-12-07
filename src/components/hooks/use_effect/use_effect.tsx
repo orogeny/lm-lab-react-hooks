@@ -12,7 +12,7 @@ type Todo = {
 export const APICall = () => {
   const [todo, setTodo] = useState<Todo[]>([]);
 
-  const grabTodo = async () => {
+  const fetchTodo = async () => {
     const response = await fetch(
       "https://jsonplaceholder.typicode.com/todos/1"
     );
@@ -27,7 +27,7 @@ export const APICall = () => {
   };
 
   useEffect(() => {
-    grabTodo();
+    fetchTodo();
   }, []);
 
   return (
