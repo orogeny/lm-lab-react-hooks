@@ -12,10 +12,22 @@ type Todo = {
 export const APICall = () => {
   const [todo, setTodo] = useState<Todo[]>([]);
 
+  const grabTodo = async () => {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos/1"
+    );
+
+    if (response.status !== 200) {
+      throw new Error("Unable to fetch todo");
+    }
+
+    const payload = (await response.json()) as Todo;
+
+    setTodo([payload]);
+  };
+
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos/1")
-      .then((response) => response.json())
-      .then((payload) => setTodo([payload]));
+    grabTodo();
   }, []);
 
   return (
