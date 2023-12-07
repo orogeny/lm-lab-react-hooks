@@ -5,6 +5,9 @@ export const CountRenders = () => {
   const countRef = useRef(0);
 
   useEffect(() => {
+    // NB it's OK to update here because we aren't performing a render at this point.
+    //    useEffect setup function is called when page is mounted (twice on strict-
+    //    sundays) and each time our CountRenders component re-renders.
     countRef.current = countRef.current + 1;
   });
 
