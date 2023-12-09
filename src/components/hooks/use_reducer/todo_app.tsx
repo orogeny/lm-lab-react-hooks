@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { AddTask } from "./add_task.js";
 import { TaskList } from "./task_list.js";
 
@@ -8,40 +8,71 @@ export interface Task {
   done: boolean;
 }
 
+type ActionType =
+  | {
+      type: "ADD_TASK";
+      text: string;
+    }
+  | {
+      type: "UPDATE_TASK";
+      updatedTask: Task;
+    }
+  | {
+      type: "DELETE_TASK";
+      taskId: string;
+    };
+
 const initialTasks: Task[] = [
   { id: crypto.randomUUID(), text: "Visit Kafka Museum", done: true },
   { id: crypto.randomUUID(), text: "Watch a puppet show", done: false },
   { id: crypto.randomUUID(), text: "Lennon Wall pic", done: false },
 ];
 
-export function TaskApp() {
-  const [tasks, setTasks] = useState(initialTasks);
+function reducer(tasks: Task[], action: ActionType) {
+  if (action.type === "ADD_TASK") {
+    console.log("Add task: ", action.text);
 
-  function handleAddTask(text: string) {
-    setTasks([
+    return [
       ...tasks,
       {
         id: crypto.randomUUID(),
-        text: text,
+        text: action.text,
         done: false,
       },
-    ]);
+    ];
   }
 
-  function handleChangeTask(updatedTask: Task) {
-    setTasks(
-      tasks.map((t) => {
-        if (t.id === updatedTask.id) {
-          return updatedTask;
-        } else {
-          return t;
-        }
-      })
+  if (action.type === "UPDATE_TASK") {
+    console.log("Update task: ", action.updatedTask.id);
+
+    return tasks.map((t) =>
+      t.id === action.updatedTask.id ? action.updatedTask : t
     );
   }
 
+  if (action.type === "DELETE_TASK") {
+    console.log("Delete task: ", action.taskId);
+
+    return tasks.filter((t) => t.id !== action.taskId);
+  }
+
+  console.error(`Unknown action: ${action}`);
+  return tasks;
+}
+
+export function TaskApp() {
+  const [tasks, dispatch] = useReducer(reducer, initialTasks);
+
+  function handleAddTask(text: string) {
+    dispatch({ type: "ADD_TASK", text });
+  }
+
+  function handleChangeTask(updatedTask: Task) {
+    dispatch({ type: "UPDATE_TASK", updatedTask });
+  }
+
   function handleDeleteTask(taskId: string) {
-    setTasks(tasks.filter((t) => t.id !== taskId));
+    dispatch({ type: "DELETE_TASK", taskId });
   }
 
   return (
