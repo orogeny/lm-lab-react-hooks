@@ -5,7 +5,7 @@ type SwapiResponse = {
   birth_year: string;
 };
 
-// const SWAPI_PERSON_IMAGE_URL = "https://starwars-visualguide.com/assets/img";
+const IMAGE_URL = "https://starwars-visualguide.com/assets/img/characters";
 const STATS_URL = "https://swapi.dev/api/people";
 
 function SwapiPerson({ id }: { id: number }) {
@@ -17,13 +17,21 @@ function SwapiPerson({ id }: { id: number }) {
 
   return (
     <>
+      <img src={`${IMAGE_URL}/${id}.jpg`} />
+
       {loadingStats && <p>Loading stats...</p>}
       {statsError && <p>Stats: Unavailable</p>}
       {stats && (
         <div>
           <h3>Stats</h3>
-          <p>Name: {stats?.name}</p>
-          <p>Birth Year: {stats?.birth_year}</p>
+          <p>
+            <strong>Name: </strong>
+            {stats?.name}
+          </p>
+          <p>
+            <strong>Birth Year: </strong>
+            {stats?.birth_year}
+          </p>
         </div>
       )}
     </>

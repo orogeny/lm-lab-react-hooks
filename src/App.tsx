@@ -45,8 +45,8 @@ function App() {
         </Section>
 
         <Section>
-          SWAPI Fetching
-          <SwapiPerson id={1} />
+          <h2>SWAPI Fetching</h2>
+          <SwapiPerson id={2} />
         </Section>
       </div>
     </>
