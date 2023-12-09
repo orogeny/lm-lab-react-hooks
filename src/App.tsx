@@ -8,6 +8,7 @@ import { Focus } from "./components/hooks/use_ref/focus";
 import { CountCats } from "./components/hooks/use_state/count_cats";
 import { TaskApp } from "./components/hooks/use_reducer/todo_app";
 import { Section } from "./components/section";
+import SwapiPerson from "./extension_exercises/swapi_person";
 
 function App() {
   return (
@@ -41,6 +42,11 @@ function App() {
         <Section>
           This is an extension!
           <TaskApp />
+        </Section>
+
+        <Section>
+          SWAPI Fetching
+          <SwapiPerson id={1} />
         </Section>
       </div>
     </>
