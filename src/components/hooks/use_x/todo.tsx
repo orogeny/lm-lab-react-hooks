@@ -1,7 +1,7 @@
 import { useTodo } from "./use_todo";
 
 export const Todo = () => {
-  const { isFetching, data } = useTodo();
+  const { isFetching, data } = useTodo("/todos/12");
 
   return (
     <>

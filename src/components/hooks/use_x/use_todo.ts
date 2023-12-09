@@ -8,11 +8,11 @@ interface TodoResponse {
   completed: boolean;
 }
 
-function useTodo() {
+function useTodo(endpoint: string) {
   const [data, setData] = useState<TodoResponse>();
   const [isFetching, setIsFetching] = useState(true);
 
-  const url = "https://jsonplaceholder.typicode.com/todos/1";
+  const url = `https://jsonplaceholder.typicode.com${endpoint}`;
 
   useEffect(() => {
     const fetchData = async () => {
