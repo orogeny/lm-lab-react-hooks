@@ -9,6 +9,7 @@ import { CountCats } from "./components/hooks/use_state/count_cats";
 import { TaskApp } from "./components/hooks/use_reducer/todo_app";
 import { Section } from "./components/section";
 import SwapiPerson from "./extension_exercises/swapi_person";
+import ThemedParent from "./components/hooks/theme_context/themed_parent";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
       <div className="App">
         <Section>
           <Parent />
+        </Section>
+
+        <Section>
+          <ThemedParent />
         </Section>
 
         <Section>
