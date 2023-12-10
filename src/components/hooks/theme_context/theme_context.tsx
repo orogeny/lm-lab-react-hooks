@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useState } from "react";
-// import useToggle from "../../../extension_exercises/use_toggle";
+import useToggle from "../../../extension_exercises/use_toggle";
 
 type Theme = {
   backgroundColor: string;
@@ -23,10 +23,7 @@ const pickTheme = (dark: boolean) => ({
 const ThemeContext = createContext<ThemeProvType | undefined>(undefined);
 
 function ThemeProvider({ children }: PropsWithChildren) {
-  //const [darkTheme, toggleTheme, setTheme] = useToggle(true);
-  const [isDarkTheme, setState] = useState(true);
-
-  const toggleTheme = () => setState((prev) => !prev);
+  const [isDarkTheme, toggleTheme] = useToggle(true);
 
   const theme = pickTheme(isDarkTheme);
 
