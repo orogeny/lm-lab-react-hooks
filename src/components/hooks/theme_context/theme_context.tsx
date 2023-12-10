@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext } from "react";
 import useToggle from "../../../extension_exercises/use_toggle";
 
 type Theme = {
